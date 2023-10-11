@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="simple site, html5, learning">
+    <meta name="description" content="The file contains basic usage of some html tags. I'm still learning. Don't judge me">
+    <meta name="author" content="Jakub Kozanecki">
+    <meta name="application-name" content="Learning html">
+    <title>Second Site</title>
+</head>
+<body>
+    <header id="Top">There should be a navigation here but it is in the <a href="#Bottom">BOTTOM</a></header>
+    <h1>Site for second laboratory &hearts;</h1>
+        <main>
+            <h2>Symbols and text format</h2>
+                <p>Aktualny kurs euro: 1&euro; = 4,54zł</p>
+                <p><strong>Call me</strong> &phone;</p>
+                <p>1 &lt; 100 &lt; 1000</p>
+                <p>&quot;<del>Myślę, więc jestem</del>&quot;</p>
+                <p>&quot;<ins><em>Cogito ergo sum</em></ins>&quot;</p>
+                <p>2<sup>2</sup>=4</p>
+                <p><small>I'm shy</small></p>
+            <h2 id="Lists">Lists</h2>
+                <h3>Ordered lists</h3>
+                    <p>Top 5 tennis players in history (subjective ranking)</p>
+                    <ol>
+                        <li>Roger Fedder</li>
+                        <li>Novak Djokovic</li>
+                        <li>Rafael Nadal</li>
+                        <li>Pete Sampras</li>
+                        <li>Hubert Hurkacz (just joking)</li>
+                    </ol>
+
+                    <ol type="A" start="2">
+                        <li>A</li>
+                        <li>B</li>
+                        <li>C</li>
+                    </ol>
+                <h3>Unordered lists</h3>
+                    <ul>
+                        <li>La naranja - Orange</li>
+                        <li>El durazno - Peach</li>
+                        <li>El mango - Mango</li>
+                        <li>La frambuesa - Rashberry</li>
+                        <li>La sandia - Watermelon</li>
+                    </ul>
+                <h3>Definition lists</h3>
+                    <dl>
+                        <dt>List</dt>
+                        <dd>sequence of element</dd>
+                        <dt>Element</dt>
+                        <dd>a squence with an opening and a closing tag</dd>
+                    </dl>
+                <h3>Nested lists</h3>
+                    <ul>
+                        <li>A</li>
+                        <ul>
+                            <li>VO</li>
+                            <ul>
+                                <li>CA</li>
+                                <ol type="I">
+                                    <li>DO</li>
+                                    <li>re</li>
+                                    <li>mi</li>
+                                    <li>fa</li>
+                                    <li>so</li>
+                                    <li>...</li>
+                                </ol>
+                                <li>I had no idea what to do</li>
+                            </ul>
+                            <li>At all</li>
+                        </ul>
+                        <li>Seriously</li>
+                    </ul>
+            <h2 id="Table">Table</h2>
+                <table border="2">
+                    <caption>Some times</caption>
+                    <thead>
+                        <tr>
+                            <th colspan="7">Time stamps</th>
+                        </tr>
+                        <tr>
+                            <th>Name</th><th>0-10</th><th>10-20</th><th>20-30</th><th>30-40</th><th>40-50</th><th>50-60</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Janek</td><td colspan="2">First stage</td><td colspan="4">Second stage</td>
+                        </tr>
+                        <tr>
+                            <td>Miłosz</td><td colspan="3">First stage</td><td colspan="1">Second stage</td><td colspan="2">Finished</td>
+                        </tr>
+                        <tr>
+                            <td>John</td><td colspan="1">First stage</td><td colspan="5">Second stage</td>
+                        </tr>
+                        <tr>
+                            <td>Ania</td><td colspan="3" rowspan="2">First stage</td><td colspan="2" rowspan="2">Second stage</td><td rowspan="2">Finished</td>
+                        </tr>
+                        <tr>
+                            <td>Amelka</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Winner</th>
+                            <td colspan="6">Miłosz</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <h2 id="Form">Form</h2>
+                    <fieldset>
+                        <legend>Log in</legend>
+                        <p>Languages Form:</p>
+                        <form method="post"></form>
+                        <input type="hidden" name="dummyCode" value="ABC123">
+                        <p>
+                            <label for="idName">Name:</label>
+                            <input id="idName" name="Name" type="text" size="30" maxlength="50">
+                        </p>
+                        <p>
+                            <label for="idPassword">Password:</label>
+                            <input id="idPassword" name="Password" type="password" size="30" maxlength="50">
+                        </p>
+                        <p>
+                            <label>Email:</label>
+                            <input name="Email" type="email" size="30" maxlength="50">
+                        </p>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Please fulfill this quick survey</legend>
+                        <p>
+                            <label>Which languages do you know?:</label>
+                            <label><input name="language" type="checkbox" value="polish" checked>Polish</label>
+                            <label><input name="language" type="checkbox" value="english" checked>English</label>
+                            <label><input name="language" type="checkbox" value="spanish">Spanish</label>
+                            <label><input name="language" type="checkbox" value="german">German</label>
+                            <label><input name="language" type="checkbox" value="russian">Russian</label>
+                        </p>
+                        <p>
+                            <label>What's your favourite language
+                                <select name="favouriteLan">
+                                    <option>Polish</option>
+                                    <option>English</option>
+                                    <option>Spanish</option>
+                                    <option>German</option>
+                                    <option>Russian</option>
+                                </select>
+                            </label>
+                        </p>
+                        <p>
+                            <textarea name="otherLang" cols="20" rows="3" placeholder="Any other?"></textarea>
+                        </p>
+                        <p>
+                            <label>When did you start learning English?:</label>
+                            <input id="idDate" name="Date" type="date">
+                        </p>
+                        <p>
+                            <label>How would you rate your English knowledge?</label>
+                            <label><input name="englishKnowledge" type="radio" value="a1">A1</label>
+                            <label><input name="englishKnowledge" type="radio" value="a2">A2</label>
+                            <label><input name="englishKnowledge" type="radio" value="b1">B1</label>
+                            <label><input name="englishKnowledge" type="radio" value="b2">B2</label>
+                            <label><input name="englishKnowledge" type="radio" value="c1">C1</label>
+                            <label><input name="englishKnowledge" type="radio" value="c2">C2</label>
+                        </p>
+                        <p>
+                            <label>Last but not least...What's your favourite color?:</label>
+                            <input id="idColor" name="Color" type="color" value="#0000000">
+                        </p>
+                    </fieldset>
+                    <p>
+                        <label>Did you like this quick survey?</label>
+                        <input name="rating" type="range" min="0" max="100" step="1" value="50">
+                    </p>
+                    <p>
+                        <input type="submit" value="Submit">
+                        <input type="reset" value="Clear">
+                    </p>
+                </main>
+        <footer id="Bottom">
+            <p><a href="#Top">Go to TOP</a></p>
+            <p><a href="#Table">See the table</a></p>
+            <p><a href="#Form">Fulfill the form</a></p>
+            <p><a href="#Lists">See the lists</a></p>
+        </footer>
+</body>
+</html>
