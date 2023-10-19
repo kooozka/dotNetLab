@@ -1,0 +1,17 @@
+table {
+    border-collapse: separate;
+    width: 50%;
+    border-style: solid;
+    border-color: black;
+    color: lightslategrey;
+}
+
+th, td {
+    border: 2px dotted black;
+    padding: 3px;
+    text-align: center;
+}
+
+th {
+    background-color: lightblue;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="table.css">
+    <title>Table</title>
+</head>
+<body>
+    <h1>Styling a table</h1>
+    <table>
+        <caption>Some times</caption>
+        <thead>
+            <tr>
+                <th colspan="7">Time stamps</th>
+            </tr>
+            <tr>
+                <th>Name</th><th>0-10</th><th>10-20</th><th>20-30</th><th>30-40</th><th>40-50</th><th>50-60</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Janek</td><td colspan="2">First stage</td><td colspan="4">Second stage</td>
+            </tr>
+            <tr>
+                <td>Miłosz</td><td colspan="3">First stage</td><td colspan="1">Second stage</td><td colspan="2">Finished</td>
+            </tr>
+            <tr>
+                <td>John</td><td colspan="1">First stage</td><td colspan="5">Second stage</td>
+            </tr>
+            <tr>
+                <td>Ania</td><td colspan="3" rowspan="2">First stage</td><td colspan="2" rowspan="2">Second stage</td><td rowspan="2">Finished</td>
+            </tr>
+            <tr>
+                <td>Amelka</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Winner</td>
+                <td colspan="6">Miłosz</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

@@ -1,0 +1,21 @@
+a:link {
+    color: lightcoral;
+    text-decoration: none;
+}
+a:visited {
+    /*text-decoration: overline; NIE DZIALA*/
+    color: darkblue;
+}
+p {
+    font-size: 30px;
+}
+p::first-letter {
+    color: red;
+    font-size: 40px;
+    font-weight: bolder;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+p::first-line {
+    color: lightcoral;
+    font-size: 25;
+}
