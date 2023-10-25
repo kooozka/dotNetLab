@@ -1,0 +1,29 @@
+p{
+    background-color: bisque;
+    color: darkblue;
+}
+.important{
+    background-color: yellow;
+    color: red;
+}
+.special{
+    background-color: black;
+    color: red;
+}
+p.special.important{
+    background-color: green;
+    color: white;
+    font-size: 25px;
+}
+section > p {
+    font-style: italic;
+    font-weight: bold;
+}
+section h2 {
+    font-style: normal;
+    font-weight: bolder;
+}
+#id {
+    font-size: small;
+    background-color: aqua;
+}
