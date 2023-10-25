@@ -3,7 +3,7 @@ a:link {
     text-decoration: none;
 }
 a:visited {
-    /*text-decoration: overline; NIE DZIALA*/
+    text-decoration: overline;
     color: darkblue;
 }
 p {
