@@ -4,37 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        h1 {
-            text-align: center;
-        }
-        table {
-            margin: auto;
-        }
-        th, td {
-            width: 45px;
-            height: 20px;
-            text-align: right;
-            border: 3px solid brown;
-        }
-        th{
-            background-color: yellow;
-        }
-        #even{
-            background-color:peachpuff;
-        }
-        #odd{
-            background-color: aqua;
-        }
-    </style>
+    <link rel="stylesheet" href="multiplicationTable.css">
 </head>
 <body>
     <h1>Multiplication Table</h1>
+    <p id="infoParagraph"></p>
     <table id="multiplicationTable"></table>
 
     <script>
         var size = window.prompt("Input the size of the multiplication table");
 
+        if (size < 5 || size > 20) {
+            size = 10;
+            document.getElementById("infoParagraph").innerText = "Size of the table set to the default value = 10";
+        }
         const numbersArray = new Array();
         for (let i = 1; i <= size; i++) {
             numbersArray[i] = Math.floor(Math.random() * 99) + 1;
