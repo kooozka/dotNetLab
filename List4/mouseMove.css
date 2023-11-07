@@ -1,0 +1,8 @@
+.canvas-container {
+    display: inline-block;
+    margin: 10px;
+  }
+  canvas {
+    border: 1px solid black;
+    background-color: yellow;
+  }
