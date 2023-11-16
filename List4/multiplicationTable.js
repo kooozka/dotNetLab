@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="multiplicationTable.css">
-</head>
-<body>
-    <h1>Multiplication Table</h1>
-    <p id="infoParagraph"></p>
-    <table id="multiplicationTable"></table>
-
-    <script>
-        var size = window.prompt("Input the size of the multiplication table");
+var size = window.prompt("Input the size of the multiplication table");
 
         if (size < 5 || size > 20) {
             size = 10;
@@ -47,6 +33,3 @@
             table.appendChild(row);
         }
         console.log(numbersArray);
-    </script>
-</body>
-</html>

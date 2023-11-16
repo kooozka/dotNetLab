@@ -1,8 +1,20 @@
-h1 {
-    text-align: center;
+.canvas-container{
+    display: inline-block;
+    margin: 10px;
+  }
+canvas{
+    border: 1px solid black;
+    background-color: yellow;
+}
+div{
+  display: inline-block;
+  margin: 30px;
+}
+h1{
+  text-align: center;
 }
 table {
-    margin: auto;
+  margin: auto;
 }
 th, td {
     width: 45px;

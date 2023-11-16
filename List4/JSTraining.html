@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="mouseMove.css">
+    <link rel="stylesheet" href="JSTraining.css">
 </head>
 <body>
+        <h1>Multiplication Table</h1>
+        <div>
+          <p id="infoParagraph"></p>
+          <table id="multiplicationTable"></table>
+
+          <script src="multiplicationTable.js"></script>
+        </div>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius, lacus vitae auctor tincidunt, ex tellus convallis nibh, a scelerisque massa metus id nisi. Donec nec libero ex. Aliquam ac justo ex. Aliquam tristique in est ac iaculis. Morbi sagittis vitae turpis ut fermentum. Nulla neque libero, auctor non dictum nec, pellentesque vel purus. Cras eu odio ipsum. Proin auctor iaculis vehicula.
 
           Quisque malesuada vel augue ut tincidunt. Mauris dapibus laoreet ligula, eu blandit felis ornare et. Donec eros elit, mattis ut tellus vitae, egestas vehicula justo. Nulla non laoreet dui. Suspendisse volutpat et odio nec dignissim. Vestibulum eget sem urna. Sed maximus justo id ultrices volutpat. Proin dui nulla, imperdiet et augue a, blandit sollicitudin dui. Suspendisse iaculis vitae ipsum quis mattis. Nunc sagittis sem nec leo efficitur vestibulum.
@@ -34,61 +41,7 @@
           <div>
             <canvas class="canvas-cross" id="myCanvas3" width="500" height="100"></canvas>
           </div>
-          <script>
-            function initializeCanvas(canvasClass) {
-              const canvasElements = document.querySelectorAll(canvasClass);
-              canvasElements.forEach((canvas) => {
-                console.log(canvas);
-                const context = canvas.getContext("2d");
-                let isDrawing = false;
-      
-                const drawLines = (x, y) => {
-                if (!isDrawing) return;
-                context.clearRect(0, 0, canvas.width, canvas.height);
-      
-                context.beginPath();
-                context.moveTo(0, y);
-                context.lineTo(x, y);
-                context.stroke();
-      
-                context.beginPath();
-                context.moveTo(x, 0);
-                context.lineTo(x, y);
-                context.stroke();
-      
-                context.beginPath();
-                context.moveTo(x, canvas.height);
-                context.lineTo(x, y);
-                context.stroke();
-      
-                context.beginPath();
-                context.moveTo(canvas.width, y);
-                context.lineTo(x, y);
-                context.stroke();
-
-                context.beginPath();
-                context.arc(x, y, 15, 0, Math.PI * 2);
-                context.stroke();
-              };
-      
-              canvas.addEventListener("mousemove", (event) => {
-                const mouseX = event.clientX - canvas.getBoundingClientRect().left;
-                const mouseY = event.clientY - canvas.getBoundingClientRect().top;
-                drawLines(mouseX, mouseY);
-              });
-      
-              canvas.addEventListener("mouseout", () => {
-                isDrawing = false;
-                context.clearRect(0, 0, canvas.width, canvas.height);
-              });
-      
-              canvas.addEventListener("mouseenter", () => {
-                isDrawing = true;
-              });
-              });
-            }
-            initializeCanvas(".canvas-cross");
-          </script>
+          <script src="mouseMove.js"></script>
       </body>
 </html>
 
