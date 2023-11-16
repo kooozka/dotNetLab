@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASUS\\Desktop\\infa\\semestr5\\dotNetLab\\List5\\ConsoleApp2\\Task1.csproj": {}
+    "C:\\Users\\ASUS\\Desktop\\infa\\semestr5\\dotNetLab\\List5\\Task1\\Task1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASUS\\Desktop\\infa\\semestr5\\dotNetLab\\List5\\ConsoleApp2\\Task1.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\infa\\semestr5\\dotNetLab\\List5\\Task1\\Task1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\infa\\semestr5\\dotNetLab\\List5\\ConsoleApp2\\Task1.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\infa\\semestr5\\dotNetLab\\List5\\Task1\\Task1.csproj",
         "projectName": "Task1",
-        "projectPath": "C:\\Users\\ASUS\\Desktop\\infa\\semestr5\\dotNetLab\\List5\\ConsoleApp2\\Task1.csproj",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\infa\\semestr5\\dotNetLab\\List5\\Task1\\Task1.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\Desktop\\infa\\semestr5\\dotNetLab\\List5\\ConsoleApp2\\obj\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\infa\\semestr5\\dotNetLab\\List5\\Task1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
