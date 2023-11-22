@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Task2",
+    "\\Task2\\Task2",
+    "\\Task2\\Task2\\wwwroot",
+    "\\Task2\\Task2\\wwwroot\\css"
   ],
-  "SelectedNode": "\\Task2.sln",
+  "SelectedNode": "\\Task2\\Task2\\wwwroot\\css\\JSTraining.css",
   "PreviewInSolutionExplorer": false
 }
