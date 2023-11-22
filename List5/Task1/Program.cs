@@ -48,6 +48,9 @@ namespace Task1
                     case 2:
                         Console.WriteLine($"Dwa rzeczywiste rozwiązania: x1 = {solution.x1}, x2 = {solution.x2}");
                         break;
+                    case int.MaxValue:
+                        Console.WriteLine("Tożsamość, nieskończenie wiele rozwiązań");
+                        break;
                 }
 
                 Console.Write("Czy chcesz kontynuować? Jeśli tak, wpisz 'tak': ");
@@ -94,8 +97,12 @@ namespace Task1
             }
             else if (b != 0)
             {
-                double x = c / b;
+                double x = -c / b;
                 return (1, x.ToString(), "absent");
+            }
+            else if (a == 0 && b == 0 && c == 0)
+            {
+                return (int.MaxValue, "absent", "absent");
             }
             else
             {
