@@ -4,6 +4,7 @@ namespace List6
 {
     internal class Program
     {
+        private const int SPACES = 3;
         static void Main(string[] args)
         {
             //Task 1
@@ -18,8 +19,26 @@ namespace List6
             int[] firstArray = { 7, 1, 8, 12, 4, 6 };
             int[] secondArray = { 2, 9, 11, 5, 4, 7 };
 
-            arraysPresentation(firstArray, secondArray);   
-            
+            printArray<int>(firstArray);
+            printArray<int>(secondArray);
+
+            arraysPresentation(firstArray, secondArray);
+
+            //Task 4
+            var otherPersonalData = new { firstName = "Jan", secondName = "Kowalski", age = 33, salary = 6412.79 };
+            Console.WriteLine($"Person: {otherPersonalData.firstName} {otherPersonalData.secondName}; Age: {otherPersonalData.age}; Earns: {otherPersonalData.salary}");
+
+            //Task 5
+            printBuisnessCard("Ryszard", "Rys", "X", 2, 20);
+            printBuisnessCard("Jan", "Brzęczyszczykiewicz", "X", 2, 20);
+            printBuisnessCard("Jakub", "Kozanecki", "X", 2, 20);
+            printBuisnessCard("Olek", "Mak", "X", 2, 30);
+            printBuisnessCard("Aleksandra");
+            printBuisnessCard("Aleksandra", borderSign: "X");
+            printBuisnessCard("Aleksandra", borderSign: "X", borderWidth: 4, minWidth: 25);
+            printBuisnessCard("Eugeniusz", secondLine: "Mróz", borderSign: "|", borderWidth: 7);
+
+
         }
 
         private static void printPersonalData((string firstName, string secondName, int age, double salary) personalData)
@@ -75,5 +94,68 @@ namespace List6
             }
             Console.WriteLine();
         }
+
+        private static void printBuisnessCard(string firstLine, string secondLine = "-", string borderSign = "#", int borderWidth = 2, int minWidth = 18)
+        {
+            if (borderWidth < 0)
+            {
+                Console.WriteLine("Border cannot be negative!");
+            }
+            else
+            {
+                int firstLineWidth = firstLine.Length + 2 * SPACES + 2 * borderWidth;
+                int secondLineWidth = secondLine.Length + 2 * SPACES + 2 * borderWidth;
+                int width = Math.Max(minWidth, Math.Max(firstLineWidth, secondLineWidth));
+
+                printBorderLine(borderSign, width, borderWidth);
+                printContentLine(firstLine, firstLineWidth, width, borderSign, borderWidth);
+                printContentLine(secondLine, secondLineWidth, width, borderSign, borderWidth);
+                printBorderLine(borderSign, width, borderWidth);
+            }
+        }
+
+        private static void printBorderLine(string borderSign, int width, int borderWidth)
+        {
+            string borderLine = new string(borderSign[0], width);
+            for (int i = 0; i < borderWidth; i++)
+            {
+                Console.WriteLine(borderLine);
+            }
+        }
+
+        private static void printContentLine(string content, int contentWidth, int width, string borderSign, int borderWidth)
+        {
+             /*string borderr = new string(borderSign[0], borderWidth);
+             int neededSpacesr = width - contentWidth;
+             Console.Write(borderr);
+             if (neededSpacesr % 2 != 0)
+             {
+                 printNeededSpaces(SPACES - 1 + neededSpacesr / 2);
+             }
+             else
+             {
+                 printNeededSpaces(SPACES + neededSpacesr / 2);
+             }
+             Console.Write(content);
+             printNeededSpaces(SPACES + neededSpacesr / 2);
+             Console.Write(borderr);
+             Console.WriteLine();*/
+             string border = new string(borderSign[0], borderWidth);
+             int neededSpaces = width - contentWidth;
+             int spacesBeforeContent = SPACES + neededSpaces / 2 + (neededSpaces % 2 != 0 ? +1 : 0);
+             int spacesAfterContent = SPACES + neededSpaces / 2;
+
+             Console.WriteLine(string.Concat(border, new string(' ', spacesBeforeContent), content, new string(' ', spacesAfterContent), border));
+        }
+
+        private static void printNeededSpaces(int neededSpaces)
+        {
+            for (int i = 0; i < neededSpaces; i++)
+            {
+                Console.Write(" ");
+            }
+        }
+
+        
     }
 }
