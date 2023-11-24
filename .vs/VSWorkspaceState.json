@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\List5",
+    "\\List5\\Test",
+    "\\List5\\Test\\BlankAppTest"
   ],
-  "SelectedNode": "\\ConsoleApp1.sln",
+  "SelectedNode": "\\List5\\Test\\BlankAppTest\\BlankAppTest.sln",
   "PreviewInSolutionExplorer": false
 }
