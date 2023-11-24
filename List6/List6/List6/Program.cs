@@ -9,7 +9,7 @@ namespace List6
         {
             //Task 1
             var myPersonalData = ("Jakub", "Kozanecki", 21, 1250.50);
-            printPersonalData(myPersonalData);
+            PrintPersonalData(myPersonalData);
 
             //Task 2
             var @class = "It is class variable";
@@ -19,29 +19,30 @@ namespace List6
             int[] firstArray = { 7, 1, 8, 12, 4, 6 };
             int[] secondArray = { 2, 9, 11, 5, 4, 7 };
 
-            printArray<int>(firstArray);
-            printArray<int>(secondArray);
+            PrintArray<int>(firstArray);
+            PrintArray<int>(secondArray);
 
-            arraysPresentation(firstArray, secondArray);
+            ArraysPresentation(firstArray, secondArray);
 
             //Task 4
             var otherPersonalData = new { firstName = "Jan", secondName = "Kowalski", age = 33, salary = 6412.79 };
             Console.WriteLine($"Person: {otherPersonalData.firstName} {otherPersonalData.secondName}; Age: {otherPersonalData.age}; Earns: {otherPersonalData.salary}");
 
             //Task 5
-            printBuisnessCard("Ryszard", "Rys", "X", 2, 20);
-            printBuisnessCard("Jan", "Brzęczyszczykiewicz", "X", 2, 20);
-            printBuisnessCard("Jakub", "Kozanecki", "X", 2, 20);
-            printBuisnessCard("Olek", "Mak", "X", 2, 30);
-            printBuisnessCard("Aleksandra");
-            printBuisnessCard("Aleksandra", borderSign: "X");
-            printBuisnessCard("Aleksandra", borderSign: "X", borderWidth: 4, minWidth: 25);
-            printBuisnessCard("Eugeniusz", secondLine: "Mróz", borderSign: "|", borderWidth: 7);
+            PrintBuisnessCard("Ryszard", "Rys", "X", 2, 20);
+            PrintBuisnessCard("Jan", "Brzęczyszczykiewicz", "X", 2, 20);
+            PrintBuisnessCard("Jakub", "Kozanecki", "X", 2, 20);
+            PrintBuisnessCard("Olek", "Mak", "X", 2, 30);
+            PrintBuisnessCard("Aleksandra");
+            PrintBuisnessCard("Aleksandra", borderSign: "X");
+            PrintBuisnessCard("Aleksandra", borderSign: "X", borderWidth: 4, minWidth: 25);
+            PrintBuisnessCard("Eugeniusz", secondLine: "Mróz", borderSign: "|", borderWidth: 7);
 
-
+            //Task 6
+            CountMyTypes("brzdac", 7, 22.12, -6, 4, 'h', "abc", "chrzascz", '#', -7.12);
         }
 
-        private static void printPersonalData((string firstName, string secondName, int age, double salary) personalData)
+        private static void PrintPersonalData((string firstName, string secondName, int age, double salary) personalData)
         {
             Console.WriteLine("First way:");
             Console.WriteLine($"Person: {personalData.Item1} {personalData.Item2}; Age: {personalData.Item3}; Earns: {personalData.Item4}");
@@ -56,28 +57,28 @@ namespace List6
             Console.WriteLine("Person: " + name + "; Age: " + age + "; Earns: " + salary);
         }
 
-        private static void arraysPresentation(int[] firstArray, int[] secondArray)
+        private static void ArraysPresentation(int[] firstArray, int[] secondArray)
         {
             Console.WriteLine("First array:");
-            printArray<int>(firstArray);
+            PrintArray<int>(firstArray);
             Console.WriteLine("Second array:");
-            printArray<int>(secondArray);
+            PrintArray<int>(secondArray);
 
             Array.Sort(firstArray);
             Console.WriteLine("First array sorted:");
-            printArray<int>(firstArray);
+            PrintArray<int>(firstArray);
 
             Array.Copy(firstArray, secondArray, 2);
             Console.WriteLine("Second array with two first elements from the first one:");
-            printArray<int>(secondArray);
+            PrintArray<int>(secondArray);
 
             Array.Reverse(firstArray);
             Console.WriteLine("First array reversed:");
-            printArray<int>(firstArray);
+            PrintArray<int>(firstArray);
 
             Array.Resize(ref secondArray, 3);
             Console.WriteLine("Second array size change:");
-            printArray<int>(secondArray);
+            PrintArray<int>(secondArray);
 
             int firstIndex = Array.IndexOf(firstArray, 6);
             int secondIndex =  Array.IndexOf(firstArray, 100);
@@ -86,7 +87,7 @@ namespace List6
             Console.WriteLine("Index of a non-existing value: " + secondIndex);
         }
 
-        private static void printArray<T>(T[] array)
+        private static void PrintArray<T>(T[] array)
         {
             foreach (T obj in array)
             {
@@ -95,7 +96,7 @@ namespace List6
             Console.WriteLine();
         }
 
-        private static void printBuisnessCard(string firstLine, string secondLine = "-", string borderSign = "#", int borderWidth = 2, int minWidth = 18)
+        private static void PrintBuisnessCard(string firstLine, string secondLine = "-", string borderSign = "#", int borderWidth = 2, int minWidth = 18)
         {
             if (borderWidth < 0)
             {
@@ -107,14 +108,14 @@ namespace List6
                 int secondLineWidth = secondLine.Length + 2 * SPACES + 2 * borderWidth;
                 int width = Math.Max(minWidth, Math.Max(firstLineWidth, secondLineWidth));
 
-                printBorderLine(borderSign, width, borderWidth);
-                printContentLine(firstLine, firstLineWidth, width, borderSign, borderWidth);
-                printContentLine(secondLine, secondLineWidth, width, borderSign, borderWidth);
-                printBorderLine(borderSign, width, borderWidth);
+                PrintBorderLine(borderSign, width, borderWidth);
+                PrintContentLine(firstLine, firstLineWidth, width, borderSign, borderWidth);
+                PrintContentLine(secondLine, secondLineWidth, width, borderSign, borderWidth);
+                PrintBorderLine(borderSign, width, borderWidth);
             }
         }
 
-        private static void printBorderLine(string borderSign, int width, int borderWidth)
+        private static void PrintBorderLine(string borderSign, int width, int borderWidth)
         {
             string borderLine = new string(borderSign[0], width);
             for (int i = 0; i < borderWidth; i++)
@@ -123,7 +124,7 @@ namespace List6
             }
         }
 
-        private static void printContentLine(string content, int contentWidth, int width, string borderSign, int borderWidth)
+        private static void PrintContentLine(string content, int contentWidth, int width, string borderSign, int borderWidth)
         {
              /*string borderr = new string(borderSign[0], borderWidth);
              int neededSpacesr = width - contentWidth;
@@ -148,14 +149,42 @@ namespace List6
              Console.WriteLine(string.Concat(border, new string(' ', spacesBeforeContent), content, new string(' ', spacesAfterContent), border));
         }
 
-        private static void printNeededSpaces(int neededSpaces)
+        private static void CountMyTypes(params object[] tab)
         {
-            for (int i = 0; i < neededSpaces; i++)
-            {
-                Console.Write(" ");
-            }
-        }
+            int evenIntCount = 0;
+            int positiveDoubleCount = 0;
+            int longStringCount = 0;
+            int otherTypesCount = 0;
 
+            foreach (object o in tab)
+            {
+                switch (o)
+                {
+                    case int number:
+                        if (number % 2 == 0)
+                        {
+                            evenIntCount++;
+                        }
+                        break;
+                    case double realNumber:
+                        if (realNumber > 0)
+                        {
+                            positiveDoubleCount++;
+                        }
+                        break;
+                    case string str:
+                        if (str.Length >= 5)
+                        {
+                            longStringCount++;
+                        }
+                        break;
+                    default:
+                        otherTypesCount++;
+                        break;
+                }
+            }
+            Console.WriteLine($"Even ints: {evenIntCount}; Positive double: {positiveDoubleCount}; At least 5-chars long strings: {longStringCount}; other types: {otherTypesCount}");
+        }
         
     }
 }
