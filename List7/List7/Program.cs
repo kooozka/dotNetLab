@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace LinqExamples
 {
@@ -54,7 +55,41 @@ namespace LinqExamples
             this.Topics = topics;
         }
 
-        public override string ToString()
+        public class Topic
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+
+            public Topic(int id, string name) 
+            { 
+                Id = id;
+                Name = name;
+            }
+        }
+
+        public class Student
+        {
+            public int Id { get; set; }
+            public int Index { get; set; }
+            public string Name { get; set; }
+            public Gender Gender { get; set; }
+            public bool Active { get; set; }
+            public int DepartmentId { get; set; }
+
+            public List<Topic> Topics { get; set; }
+            public Student(int id, int index, string name, Gender gender, bool active,
+                int departmentId, List<Topic> topics)
+            {
+                this.Id = id;
+                this.Index = index;
+                this.Name = name;
+                this.Gender = gender;
+                this.Active = active;
+                this.DepartmentId = departmentId;
+                this.Topics = topics;
+            }
+
+            public override string ToString()
         {
             var result = $"{Id,2}) {Index,5}, {Name,11}, {Gender,6},{(Active ? "active" : "no active"),9},{DepartmentId,2}, topics: ";
             foreach (var str in Topics)
@@ -137,9 +172,7 @@ namespace LinqExamples
 
         public static void SortAndGroupStudents(List<StudentWithTopics> students, int groupSize)
         {
-            Console.WriteLine();
-            Console.WriteLine($"Sorted and grouped students. Group size: {groupSize}");
-            Console.WriteLine();
+            printTitle($"Sorted and grouped students. Group size: {groupSize}");
 
             var sortedStudents = students
                 .OrderBy(s => s.Name)
@@ -163,6 +196,58 @@ namespace LinqExamples
             Console.WriteLine("---------------------------------------------------------------------------");
         }
 
+        public static void SortTopics(List<StudentWithTopics> students)
+        {
+            printTitle("Sorted topics");
+
+            var sortedTopics = students
+                .SelectMany(s => s.Topics)
+                .GroupBy(topic => topic)
+                .OrderByDescending(group => group.Count())
+                .Select(group => group.Key)
+                .ToList();
+
+            foreach (var topic in sortedTopics)
+            {
+                Console.WriteLine(topic);
+            }
+        }
+
+        public static void SortTopicsII(List<StudentWithTopics> students)
+        {
+            printTitle("Sorted and grouped topics");
+
+            var sortedTopics = students
+              .SelectMany(s => s.Topics.Select(topic => new {Gender = s.Gender, Topic = topic }))
+              .GroupBy(st => new { st.Gender, st.Topic })
+              .OrderBy(group => group.Key.Gender)
+              .ThenByDescending(group => group.Count())
+              .ThenBy(group => group.Key.Topic);
+
+            string currentGender = null;
+
+            foreach (var group in sortedTopics)
+            {
+                if (currentGender != group.Key.Gender.ToString())
+                {
+                    Console.WriteLine("---------------------------------------------------------------------------");
+                    Console.WriteLine($"Płeć: {group.Key.Gender}");
+                    Console.WriteLine("---------------------------------------------------------------------------");
+                    currentGender = group.Key.Gender.ToString();
+                }
+                Console.WriteLine($"  Przedmiot: {group.Key.Topic}, Częstość występowania: {group.Count()}");
+            }
+
+        }
+
+        private static void printTitle(string title)
+        {
+            Console.WriteLine();
+            Console.WriteLine(title);
+            Console.WriteLine();
+        }
+
+
 
         static void Main()
         {
@@ -171,6 +256,11 @@ namespace LinqExamples
             SortAndGroupStudents(students, 2);
             SortAndGroupStudents(students, 3);
             SortAndGroupStudents(students, 5);
+
+            //Task 2
+            SortTopics(students);
+
+            SortTopicsII(students);
         }
     }
 }
