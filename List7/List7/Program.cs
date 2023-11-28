@@ -3,13 +3,29 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 using static LinqExamples.StudentWithTopics;
 
 namespace LinqExamples
 {
 
-
+    public class Calculator
+    {
+        public int Add(int a, int b)
+        {
+            return a + b;
+        }
+    }
+    
+    public class MyClass
+    {
+        public void MyMethod(int param1, string param2)
+        {
+            Console.WriteLine($"MyMethod called with parameters: {param1}, {param2}");
+        }
+    }
     public class Department
     {
         public int Id { get; set; }
@@ -55,6 +71,7 @@ namespace LinqExamples
             this.DepartmentId = departmentId;
             this.Topics = topics;
         }
+    }
 
         public class Topic
         {
@@ -345,7 +362,25 @@ namespace LinqExamples
                 //Task3
                 GetStudentsFromStudentsWithTopicsI(students);
                 GetStudentsFromStudentsWithTopicsII(students);
-            }
+
+                //Task 4
+                //object o1 = new Topic(1, "C#");
+
+                //MethodInfo methodInfo1 = o1.GetType().GetMethod("set_Id",
+                    //new Type[] {typeof(int)});
+            //object[] parameters = { 4 };
+                //object result1 = methodInfo1.Invoke(o1, parameters);
+                //MethodInfo methodInfo2 = o1.GetType().GetMethod("get_Id",
+                    //new Type[] { });
+            //Console.WriteLine(result1.GetType().Name);
+            //Console.WriteLine($"New value: {methodInfo2.Invoke(result1, new object[] {})}");
+
+            object calculatorInstance = new Calculator();
+            MethodInfo addMethod = calculatorInstance.GetType().GetMethod("Add", new Type[] {typeof(int), typeof(int)});
+            object[] parameters1 = { 3, 5 };
+            object result = addMethod.Invoke(calculatorInstance, parameters1);
+            Console.WriteLine($"Result: {result}");
+        }
         }
     }
-}
+
