@@ -71,6 +71,14 @@ namespace LinqExamples
             this.DepartmentId = departmentId;
             this.Topics = topics;
         }
+
+        public override string ToString()
+        {
+            var result = $"{Id,2}) {Index,5}, {Name,11}, {Gender,6},{(Active ? "active" : "no active"),9},{DepartmentId,2}, topics: ";
+            foreach (var str in Topics)
+                result += str + ", ";
+            return result;
+        }
     }
 
         public class Topic
@@ -83,7 +91,12 @@ namespace LinqExamples
                 Id = id;
                 Name = name;
             }
+
+        public override string ToString()
+        {
+            return "ID: " + Id + "; Name: " + Name;
         }
+    }
 
         public class Student
         {
@@ -190,6 +203,15 @@ namespace LinqExamples
                 };
             }
 
+        public static List<Topic> GenerateTopicsUsingTopicsNames(List<string> topicsNames)
+        {
+            return topicsNames
+                .GroupBy(topic => topic)
+                .Select(group => group.Key)
+                .ToList()
+                .Select((topicName, index) => new Topic(index, topicName)).ToList();
+        }
+
 
             public static List<Department> GenerateDepartmentsEasy()
             {
@@ -253,28 +275,53 @@ namespace LinqExamples
             {
                 PrintTitle("Sorted and grouped topics");
 
-                var sortedTopics = students
-                  .SelectMany(s => s.Topics.Select(topic => new { Gender = s.Gender, Topic = topic }))
-                  .GroupBy(st => new { st.Gender, st.Topic })
-                  .OrderBy(group => group.Key.Gender)
-                  .ThenByDescending(group => group.Count())
-                  .ThenBy(group => group.Key.Topic);
+            /*var sortedTopics = students
+              .SelectMany(s => s.Topics.Select(topic => new { Gender = s.Gender, Topic = topic }))
+              .GroupBy(st => new { st.Gender, st.Topic })
+              .OrderBy(group => group.Key.Gender)
+              .ThenByDescending(group => group.Count())
+              .ThenBy(group => group.Key.Topic);
 
-                string currentGender = null;
+            string currentGender = null;
 
-                foreach (var group in sortedTopics)
+            foreach (var group in sortedTopics)
+            {
+                if (currentGender != group.Key.Gender.ToString())
                 {
-                    if (currentGender != group.Key.Gender.ToString())
-                    {
-                        Console.WriteLine("---------------------------------------------------------------------------");
-                        Console.WriteLine($"Płeć: {group.Key.Gender}");
-                        Console.WriteLine("---------------------------------------------------------------------------");
-                        currentGender = group.Key.Gender.ToString();
-                    }
-                    Console.WriteLine($"  Przedmiot: {group.Key.Topic}, Częstość występowania: {group.Count()}");
+                    Console.WriteLine("---------------------------------------------------------------------------");
+                    Console.WriteLine($"Płeć: {group.Key.Gender}");
+                    Console.WriteLine("---------------------------------------------------------------------------");
+                    currentGender = group.Key.Gender.ToString();
                 }
+                Console.WriteLine($"  Przedmiot: {group.Key.Topic}, Częstość występowania: {group.Count()}");
+            }*/
 
+            var sortedTopicsII = students
+                .GroupBy(students => students.Gender)
+                .Select(group =>
+                {
+                    var sortedTopics = group
+                        .SelectMany(s => s.Topics)
+                        .GroupBy(topic => topic)
+                        .OrderByDescending(group => group.Count())
+                        .ToList();
+                    return new
+                    {
+                        Gender = group.Key,
+                        SortedTopics = sortedTopics
+                    };
+                });
+            foreach (var group in sortedTopicsII)
+            {
+                Console.WriteLine($"Gender: {group.Gender}");
+                foreach (var topicGroup in group.SortedTopics)
+                {
+                    Console.WriteLine($"  Topic: {topicGroup.Key}, Count: {topicGroup.Count()}");
+                }
             }
+
+
+        }
 
             //Task 3
             public static List<Student> GetStudentsFromStudentsWithTopicsI(List<StudentWithTopics> studentsWithTopics)
@@ -318,7 +365,7 @@ namespace LinqExamples
 
             public static List<Student> GetStudentsFromStudentsWithTopicsII(List<StudentWithTopics> studentsWithTopics)
             {
-                PrintTitle("Students from Students With Topics #1");
+                PrintTitle("Students from Students With Topics #2");
 
                 var students =  studentsWithTopics
                     .Select(swt => new Student(
@@ -336,7 +383,25 @@ namespace LinqExamples
 
             private static List<int> GenerateTopics(List<string> topicsNames)
             {
-                return topicsNames.Select(topicsName => topicsName.GetHashCode()).ToList();
+                List<string> allTopicsNames = new List<string>
+                {
+                    "C#",
+                    "PHP",
+                    "algorithms",
+                    "web programming",
+                    "Java",
+                    "Basic",
+                    "neural networks",
+                    "fuzzy logic",
+                    "JavaScript",
+                    "C++"
+                };
+            List<Topic> topics = Generator.GenerateTopicsUsingTopicsNames(allTopicsNames);
+
+            return topics
+                .Where(topic => topicsNames.Contains(topic.Name))
+                .Select(topic => topic.Id)
+                .ToList();
             }
 
             private static void PrintTitle(string title)
@@ -363,22 +428,23 @@ namespace LinqExamples
                 GetStudentsFromStudentsWithTopicsI(students);
                 GetStudentsFromStudentsWithTopicsII(students);
 
-                //Task 4
-                //object o1 = new Topic(1, "C#");
+            //Task 4
+            //object o1 = new Topic(1, "C#");
 
-                //MethodInfo methodInfo1 = o1.GetType().GetMethod("set_Id",
-                    //new Type[] {typeof(int)});
+            //MethodInfo methodInfo1 = o1.GetType().GetMethod("set_Id",
+            //new Type[] {typeof(int)});
             //object[] parameters = { 4 };
-                //object result1 = methodInfo1.Invoke(o1, parameters);
-                //MethodInfo methodInfo2 = o1.GetType().GetMethod("get_Id",
-                    //new Type[] { });
+            //object result1 = methodInfo1.Invoke(o1, parameters);
+            //MethodInfo methodInfo2 = o1.GetType().GetMethod("get_Id",
+            //new Type[] { });
             //Console.WriteLine(result1.GetType().Name);
             //Console.WriteLine($"New value: {methodInfo2.Invoke(result1, new object[] {})}");
 
-            object calculatorInstance = new Calculator();
-            MethodInfo addMethod = calculatorInstance.GetType().GetMethod("Add", new Type[] {typeof(int), typeof(int)});
+            Type type = Type.GetType("LinqExamples.Calculator");
+            object calculator = Activator.CreateInstance(type);
+            MethodInfo addMethod = calculator.GetType().GetMethod("Add", new Type[] {typeof(int), typeof(int)});
             object[] parameters1 = { 3, 5 };
-            object result = addMethod.Invoke(calculatorInstance, parameters1);
+            object result = addMethod.Invoke(calculator, parameters1);
             Console.WriteLine($"Result: {result}");
         }
         }

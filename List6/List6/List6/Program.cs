@@ -26,7 +26,7 @@ namespace List6
 
             //Task 4
             var otherPersonalData = new { firstName = "Jan", secondName = "Kowalski", age = 33, salary = 6412.79 };
-            Console.WriteLine($"Person: {otherPersonalData.firstName} {otherPersonalData.secondName}; Age: {otherPersonalData.age}; Earns: {otherPersonalData.salary}");
+            DisplayAnonymousType(otherPersonalData);
 
             //Task 5
             PrintBuisnessCard("Ryszard", "Rys", "X", 2, 20);
@@ -51,10 +51,8 @@ namespace List6
             Console.WriteLine($"Person: {personalData.firstName} {personalData.secondName}; Age: {personalData.age}; Earns: {personalData.salary}");
 
             Console.WriteLine("Third way:");
-            var name = personalData.firstName + " " + personalData.secondName;
-            var age = personalData.age;
-            var salary = personalData.salary;
-            Console.WriteLine("Person: " + name + "; Age: " + age + "; Earns: " + salary);
+            (string firstName, string secondName, int age, double salary) info = personalData;
+
         }
 
         private static void ArraysPresentation(int[] firstArray, int[] secondArray)
@@ -94,6 +92,11 @@ namespace List6
                 Console.Write(obj.ToString() + " ");
             }
             Console.WriteLine();
+        }
+
+        private static void DisplayAnonymousType(dynamic anonymousObject)
+        {
+            Console.WriteLine($"Name: {anonymousObject.firstName} {anonymousObject.secondName}");
         }
 
         private static void PrintBuisnessCard(string firstLine, string secondLine = "-", string borderSign = "#", int borderWidth = 2, int minWidth = 18)
@@ -160,23 +163,14 @@ namespace List6
             {
                 switch (o)
                 {
-                    case int number:
-                        if (number % 2 == 0)
-                        {
-                            evenIntCount++;
-                        }
+                    case int number when number % 2 == 0:
+                        evenIntCount++;
                         break;
-                    case double realNumber:
-                        if (realNumber > 0)
-                        {
-                            positiveDoubleCount++;
-                        }
+                    case double realNumber when realNumber > 0:
+                        positiveDoubleCount++;
                         break;
-                    case string str:
-                        if (str.Length >= 5)
-                        {
-                            longStringCount++;
-                        }
+                    case string str when str.Length >= 5:
+                        longStringCount++;
                         break;
                     default:
                         otherTypesCount++;
