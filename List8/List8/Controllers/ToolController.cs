@@ -16,15 +16,19 @@ namespace List8.Controllers
             switch (result.solutionsCount) {
                 case 0:
                     ViewBag.Message = "No real solutions";
+                    ViewBag.CssClass = "no-solutions";
                     break;
                 case 1:
                     ViewBag.Message = $"One real solution x = {result.x1}";
+                    ViewBag.CssClass = "one-solution";
                     break;
                 case 2:
                     ViewBag.Message = $"Two real solutions: x1 = {result.x1}, x2 = {result.x2}";
+                    ViewBag.CssClass = "two-solutions";
                     break;
                 default:
                     ViewBag.Message = $"Identity equation";
+                    ViewBag.CssClass = "identity";
                     break;
             }
             return View();

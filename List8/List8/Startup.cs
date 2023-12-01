@@ -54,12 +54,12 @@ namespace List8
 
                 endpoints.MapControllerRoute(
                     name: "solve",
-                    pattern: "Tool/Solve/{a}/{b}/{c}",
-                    defaults: new
+                    pattern: "{controller=Tool}/{action=Solve}/{a}/{b}/{c}"
+                    /*defaults: new
                     {
                         controller = "Tool",
                         action = "Solve"
-                    });
+                    }*/);
             });
         }
     }
