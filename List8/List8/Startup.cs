@@ -48,18 +48,42 @@ namespace List8
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapControllerRoute(
-                    name: "solve",
-                    pattern: "{controller=Tool}/{action=Solve}/{a}/{b}/{c}"
-                    /*defaults: new
-                    {
-                        controller = "Tool",
-                        action = "Solve"
-                    }*/);
+            endpoints.MapControllerRoute(
+                name: "solve",
+                pattern: "Tool/Solve/{a}/{b}/{c}",
+                defaults: new
+                {
+                    controller = "Tool",
+                    action = "Solve"
+                });
+            endpoints.MapControllerRoute(
+                name: "setRange",
+                pattern: "Set,{n}",
+                defaults: new
+                {
+                    controller = "Game",
+                    action = "Set"
+                });
+            endpoints.MapControllerRoute(
+                name: "draw",
+                pattern: "Draw",
+                defaults: new
+                {
+                    controller = "Game",
+                    action = "Draw"
+                });
+            endpoints.MapControllerRoute(
+                name: "guess",
+                pattern: "Guess,{guess}",
+                defaults: new
+                {
+                    controller = "Game",
+                    action = "Guess"
+                });
             });
         }
     }

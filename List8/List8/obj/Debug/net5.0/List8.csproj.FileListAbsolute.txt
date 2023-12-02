@@ -38,3 +38,4 @@ C:\Users\ASUS\Desktop\infa\semestr5\dotNetLab\List8\List8\obj\Debug\net5.0\List8
 C:\Users\ASUS\Desktop\infa\semestr5\dotNetLab\List8\List8\obj\Debug\net5.0\ref\List8.dll
 C:\Users\ASUS\Desktop\infa\semestr5\dotNetLab\List8\List8\obj\Debug\net5.0\List8.csproj.CopyComplete
 C:\Users\ASUS\Desktop\infa\semestr5\dotNetLab\List8\List8\obj\Debug\net5.0\Razor\Views\Tool\Solve.cshtml.g.cs
+C:\Users\ASUS\Desktop\infa\semestr5\dotNetLab\List8\List8\obj\Debug\net5.0\Razor\Views\Game\Game.cshtml.g.cs
