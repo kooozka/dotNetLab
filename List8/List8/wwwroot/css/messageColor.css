@@ -14,18 +14,18 @@
     width: 100%;
 }
 
-.two-solutions {
+.green-colored {
     color: darkgreen;
 }
 
-.one-solution {
+.blue-colored {
     color: darkblue;
 }
 
-.no-solutions {
+.red-colored {
     color: darkred;
 }
 
-.identity {
+.aqua-colored {
     color: aqua;
 }
