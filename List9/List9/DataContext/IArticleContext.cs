@@ -11,6 +11,6 @@ namespace List9.DataContext
         ArticleViewModel GetArticle(int id);
         void AddArticle(ArticleViewModel article);
         void RemoveArticle(int id);
-        void UpdateArticle(int id, ArticleViewModel article);
+        void UpdateArticle(ArticleViewModel article);
     }
 }

@@ -1,3 +1,4 @@
+using List9.DataContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +26,10 @@ namespace List9
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //services.AddSingleton<IArticleContext, ListArticlesContext>();
+            services.AddSingleton<IArticleContext, DictionaryArticlesContext>();
+
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
