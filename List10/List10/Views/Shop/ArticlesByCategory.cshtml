@@ -1,0 +1,74 @@
+﻿@model List10.Models.ShopViewModel
+@{
+    ViewData["Title"] = "Views_Shop_ArticlesByCategory";
+}
+
+<h1>Shop</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Articles.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Articles.FirstOrDefault().Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Articles.FirstOrDefault().ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Articles.FirstOrDefault().Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Articles)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="/@Url.Content(item.ImageUrl)
+                                " alt="Image" style="max-width: 100px; max-height: 100px;" />
+                    }
+                    else
+                    {
+                        <img src="~/image/emptyPhoto.png" alt="Image" style="max-width: 100px; max-height: 100px;" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section SideBarNav
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="list-group">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <a asp-action="ArticlesByCategory" asp-route-categoryId="@category.Id" class="list-group-item list-group-item-action">@category.Name</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
