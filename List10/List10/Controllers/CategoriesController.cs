@@ -148,13 +148,13 @@ namespace List10.Controllers
         {
             var category = await _context.Categories.FindAsync(id);
 
-            var articlesToDelete = _context.Articles.Where(a => a.Id == id).ToList();
+            var articlesToDelete = _context.Articles.Where(a => a.CategoryId == id).ToList();
 
             foreach (var article in articlesToDelete)
             {
                 if (!string.IsNullOrEmpty(article.ImageUrl))
                 {
-                    var imagePath = Path.Combine(_hostingEnvironment.WebRootPath, article.ImageUrl);
+                    var imagePath = Path.Combine("/", _hostingEnvironment.WebRootPath, article.ImageUrl);
                     if (System.IO.File.Exists(imagePath))
                     {
                         System.IO.File.Delete(imagePath);

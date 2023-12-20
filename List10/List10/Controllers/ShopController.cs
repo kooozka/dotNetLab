@@ -31,6 +31,10 @@ namespace List10.Controllers
 
         public async Task<IActionResult> ArticlesByCategory(int categoryId)
         {
+            if (categoryId == 0)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             var category = await _context.Categories.FindAsync(categoryId);
             var allCategories = await _context.Categories.ToListAsync();
 

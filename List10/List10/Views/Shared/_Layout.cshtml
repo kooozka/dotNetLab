@@ -38,17 +38,12 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md3"></div>
+    <!-- @RenderSection("SideBarNav", required: false) -->
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </div>
-            @RenderSection("SideBarNav", required: false)
-                <div class="container">
-                    <main role="main" class="pb-3">
-                        @RenderBody()
-                    </main>
-    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
