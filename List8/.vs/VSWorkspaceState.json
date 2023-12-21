@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\List8",
-    "\\List8\\Controllers"
+    "\\List8\\Controllers",
+    "\\List8\\Views",
+    "\\List8\\Views\\Game"
   ],
-  "SelectedNode": "\\List8\\Startup.cs",
+  "SelectedNode": "\\List8\\Views\\Game\\Game.cshtml",
   "PreviewInSolutionExplorer": false
 }

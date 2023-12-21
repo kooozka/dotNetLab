@@ -23,6 +23,14 @@ namespace List8
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(5);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             services.AddControllersWithViews();
         }
 
@@ -46,6 +54,8 @@ namespace List8
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
             endpoints.MapControllerRoute(
@@ -53,6 +63,15 @@ namespace List8
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             endpoints.MapControllerRoute(
+                name: "home",
+                pattern: "Game",
+                defaults: new
+                {
+                    controller = "Game",
+                    action = "Index"
+                });
+
+                endpoints.MapControllerRoute(
                 name: "solve",
                 pattern: "Tool/Solve/{a}/{b}/{c}",
                 defaults: new
