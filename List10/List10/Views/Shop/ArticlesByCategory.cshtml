@@ -56,27 +56,10 @@
                     @Html.DisplayFor(modelItem => item.Category.Name)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="AddToCart" asp-route-id="@item.Id">Add</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-@section SideBarNav
-{
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="list-group">
-                    @foreach (var category in Model.Categories)
-                    {
-                        <a asp-action="ArticlesByCategory" asp-route-categoryId="@category.Id" class="list-group-item list-group-item-action">@category.Name</a>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-}

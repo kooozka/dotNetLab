@@ -1,7 +1,9 @@
 ﻿using List10.Data;
 using List10.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -53,6 +55,20 @@ namespace List10.Controllers
                 Articles = articles,
             };
             return View(viewModel);
+        }
+
+        public IActionResult AddToCart(int articleId) 
+        {
+            CookieOptions option = new CookieOptions();
+            option.Expires = DateTime.Now.AddDays(7);
+
+            var cookieKey = "article" + articleId;
+            var articleCount = 0;
+            bool successful = int.TryParse(Request.Cookies[cookieKey], out articleCount);
+            articleCount = successful ? articleCount + 1 : 1;
+
+            Response.Cookies.Append(cookieKey, articleCount.ToString(), option);
+            return RedirectToAction(nameof(ArticlesByCategory));
         }
     }
 }
