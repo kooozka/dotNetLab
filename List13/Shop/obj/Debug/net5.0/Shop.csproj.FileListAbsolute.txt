@@ -96,3 +96,5 @@ C:\Users\ASUS\Desktop\infa\semestr5\dotNetLab\List13\Shop\obj\Debug\net5.0\ref\S
 C:\Users\ASUS\Desktop\infa\semestr5\dotNetLab\List13\Shop\obj\Debug\net5.0\Razor\Views\Cart\Index.cshtml.g.cs
 C:\Users\ASUS\Desktop\infa\semestr5\dotNetLab\List13\Shop\obj\Debug\net5.0\Razor\Views\Shop\ArticlesByCategory.cshtml.g.cs
 C:\Users\ASUS\Desktop\infa\semestr5\dotNetLab\List13\Shop\obj\Debug\net5.0\Razor\Views\Shop\Index.cshtml.g.cs
+C:\Users\ASUS\Desktop\infa\semestr5\dotNetLab\List13\Shop\obj\Debug\net5.0\Razor\Views\Cart\FinalizeOrder.cshtml.g.cs
+C:\Users\ASUS\Desktop\infa\semestr5\dotNetLab\List13\Shop\obj\Debug\net5.0\Razor\Views\Cart\ConfirmOrder.cshtml.g.cs

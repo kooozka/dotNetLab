@@ -1,0 +1,40 @@
+﻿@model Shop.Models.OrderViewModel
+
+@{
+    ViewData["Title"] = "Confirmation";
+}
+
+<h1>
+    Shop
+    <a asp-controller="Cart" asp-action="Index" class="float-right">
+        <img src="~/image/shoppingCart.png" alt="Image" style="max-width: 70px; max-height: 70px;" />
+    </a>
+</h1>
+<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Name)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Address)
+            </td>
+        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMethod)
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => Model.PaymentMethod)
+        </td>
+    </tr>
+</table>
+<h3>Order Confirmed! Go back to the shop.</h3>
+<a class="btn btn-xs btn-primary" asp-area="" asp-controller="Shop" asp-action="Index">Shop</a>

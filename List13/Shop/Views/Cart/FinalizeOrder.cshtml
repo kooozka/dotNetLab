@@ -10,8 +10,6 @@
         <img src="~/image/shoppingCart.png" alt="Image" style="max-width: 70px; max-height: 70px;" />
     </a>
 </h1>
-@if (Model.Articles.Keys.Any())
-{
     <table class="table">
         <thead>
             <tr>
@@ -46,8 +44,8 @@
                     <td>
                         @if (!string.IsNullOrEmpty(item.ImageUrl))
                         {
-                            <img src="@Url.Content(item.ImageUrl)
-                            " alt="Image" style="max-width: 100px; max-height: 100px;" />
+                            <img src="/@Url.Content(item.ImageUrl)
+                                        " alt="Image" style="max-width: 100px; max-height: 100px;" />
                         }
                         else
                         {
@@ -58,20 +56,48 @@
                         @Html.DisplayFor(modelItem => item.Category.Name)
                     </td>
                     <td>
-                        <a asp-controller="Cart" asp-action="DecreaseCount" asp-route-articleId="@item.Id">-</a>
                         @Html.DisplayFor(modelItem => modelItem.Articles[item])
-                        <a asp-controller="Cart" asp-action="IncreaseCount" asp-route-articleId="@item.Id">+</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <div style="margin-right: 15%; white-space: pre;" class="float-right text-right">
-        <h5>Total: @string.Format("{0:C}", @Model.CartValue)</h5>
-        <a class=" nav-link float-right btn btn-primary" asp-area="" asp-controller="Cart" asp-action="FinalizeOrder">Finalize order</a>
-    </div>
-}
-else
-{
-    <h2 style="padding-top: 80px;" class="text-center">Your shopping cart is empty.</h2>
-}
+
+<div class="container mt-4 col-md-6">
+
+    <form asp-controller="Cart" asp-action="ConfirmOrder" method="post">
+        <div class="form-group">
+            <label for="fullName">Full Name:</label>
+            <input type="text" class="form-control" id="fullName" name="fullName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" class="form-control" id="address" name="address" required>
+        </div>
+
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="Credit Card">
+                <label class="form-check-label" for="creditCard">
+                    Credit Card
+                </label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="paypal" value="PayPal">
+                <label class="form-check-label" for="paypal">
+                    PayPal
+                </label>
+            </div>
+        </div>
+
+        <div style="white-space: pre;" class="col-md-6 mx-auto text-center d-flex justify-content-center flex-column">
+            <h5>Total: @string.Format("{0:C}", @Model.CartValue)</h5>
+            <button type="submit" class="btn btn-primary">Confirm order</button>
+        </div>
+    </form>
+</div>
+
+
+

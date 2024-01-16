@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Shop.Controllers
 {
@@ -77,6 +78,55 @@ namespace Shop.Controllers
                 Response.Cookies.Append(cookieKey, count.ToString(), option);
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        [Authorize]
+        public async Task<IActionResult> FinalizeOrder()
+        {
+            List<Article> articles = await _context.Articles.ToListAsync();
+            List<Category> categories = await _context.Categories.ToListAsync();
+            List<int> articlesIds = articles.Select(a => a.Id).ToList();
+            Dictionary<Article, int> articlesCounts = new Dictionary<Article, int>();
+            double value = 0;
+            foreach (int articleId in articlesIds)
+            {
+                string cookieKey = $"article{articleId}";
+                string cookieValue = Request.Cookies[cookieKey];
+                Article article = await _context.Articles.FindAsync(articleId);
+
+                if (int.TryParse(cookieValue, out int count))
+                {
+                    articlesCounts[article] = count;
+                }
+                value += count * article.Price;
+            }
+            var viewModel = new CartViewModel
+            {
+                Articles = articlesCounts,
+                Categories = categories,
+                CartValue = Math.Round(value, 2)
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ConfirmOrder(string fullName, string address, string paymentMethod)
+        {
+            var viewModel = new OrderViewModel 
+            { 
+                Name = fullName,
+                Address = address,
+                PaymentMethod = paymentMethod
+            };
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                if (cookie.StartsWith("article"))
+                {
+                    Response.Cookies.Delete(cookie);
+                }
+            }
+            return View(viewModel);
         }
     }
 }
