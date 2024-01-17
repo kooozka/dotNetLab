@@ -20,6 +20,14 @@ namespace Shop.Data
                 };
                 IdentityResult roleResult = roleManager.CreateAsync(role).Result;
             }
+            if (!roleManager.RoleExistsAsync("User").Result)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = "User"
+                };
+                IdentityResult roleResult = roleManager.CreateAsync(role).Result;
+            }
         }
 
         public static void SeedOneUser(UserManager<IdentityUser> userManager,
@@ -41,9 +49,8 @@ namespace Shop.Data
         }
         public static void SeedUsers(UserManager<IdentityUser> userManager)
         {
-            SeedOneUser(userManager, "normaluser@localhost", "P@ssw0rd");
+            SeedOneUser(userManager, "user@localhost", "P@ssw0rd", "User");
             SeedOneUser(userManager, "admin@localhost", "P@ssw0rd", "Admin");
-            SeedOneUser(userManager, "deanuser@localhost", "P@ssw0rd");
         }
     }
 }

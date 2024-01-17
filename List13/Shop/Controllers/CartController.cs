@@ -80,7 +80,7 @@ namespace Shop.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> FinalizeOrder()
         {
             List<Article> articles = await _context.Articles.ToListAsync();

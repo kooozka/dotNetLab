@@ -66,6 +66,7 @@ namespace Shop.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Obsolete]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Id,Name,Price,FormFile,CategoryId")] ArticleViewModel articleView)
         {
             if (ModelState.IsValid)
@@ -126,6 +127,7 @@ namespace Shop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,ImageUrl,CategoryId")] Article article)
         {
             if (id != article.Id)
@@ -181,6 +183,7 @@ namespace Shop.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Obsolete]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var article = await _context.Articles.FindAsync(id);
