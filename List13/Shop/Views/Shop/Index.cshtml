@@ -19,7 +19,7 @@
         <button type="submit" class="btn btn-primary">Filter</button>
     </form>
 </div>
-<table class="table">
+<table class="table" id="articlesTable">
     <thead>
         <tr>
             <th>
@@ -62,17 +62,98 @@
                     @Html.DisplayFor(modelItem => item.Category.Name)
                 </td>
                 <td>
-                    @if (!User.IsInRole("Admin"))
-                    {
-                        <a asp-action="AddToCart" asp-route-articleId="@item.Id">Add</a>
-                    }
-                    else
-                    {
-                        <p>Add</p>
-                    }
+                    <a asp-action="AddToCart" asp-route-articleId="@item.Id">Add</a>
                 </td>
             </tr>
         }
+        <tr>
+
+        </tr>
     </tbody>
 </table>
+<div>
+    <button onclick="loadMoreArticles()" id="loadMoreButton">Load More</button>
+</div>
+
+@section Scripts {
+    <script>
+        var currentPage = 1;
+        var pageSize = 5
+
+        var categories = [];
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/api/article/hasmore",
+                success: function (cos) {
+                    if (!cos) {
+                        $('#loadMoreButton').hide();
+                    }
+                },
+                error: function () {
+                    console.error('Wystąpił błąd podczas ładowania artykułów.');
+                }
+            });
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "/api/categories",
+            success: function (data) {
+                categories = data;
+            },
+            error: function () {
+                console.error('Wystąpił błąd podczas pobierania kategorii.');
+            }
+        });
+        function loadMoreArticles() {
+            $.ajax({
+                type: "GET",
+                url: "/api/article/getarticles",
+                success: function (data) {
+                        $.each(data, function (index, article) {
+                            var category = categories.find(c => c.id == article.categoryId).name;
+                            $('#articlesTable tbody').append(`
+                                <tr>
+                                    <td>
+                                        ${article.name}
+                                    </td>
+                                    <td>
+                                        ${article.price}
+                                    </td>
+                                    <td>
+                                        ${article.imageUrl ?
+                                            '<img src="' + article.imageUrl + '" alt="Image" style="max-width: 100px; max-height: 100px;" />' :
+                                            '<img src="/image/emptyPhoto.png" alt="Image" style="max-width: 100px; max-height: 100px;" />'
+                                        }
+                                    </td>
+                                    <td>${category}</td>
+                                    <td>
+                                        <a href="/Shop/AddToCart?articleId=${article.id}">Add</a>
+                                    </td>
+                                </tr>
+                            `);
+                        });
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/article/hasmore",
+                            success: function(cos) {
+                                if (!cos) {
+                                    $('#loadMoreButton').hide();
+                                }
+                            },
+                        error: function () {
+                                console.error('Wystąpił błąd podczas ładowania artykułów.');
+                        }
+                    });
+                },
+                error: function () {
+                    console.error('Wystąpił błąd podczas ładowania artykułów.');
+                }
+            });
+            currentPage++;
+        }
+    </script>
+}
 

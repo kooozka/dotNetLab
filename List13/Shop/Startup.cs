@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shop.Data;
+using Shop.Models;
+using Shop.Services;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -28,7 +30,24 @@ namespace Shop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()  // from any origin, but only GET
+                        .AllowAnyHeader()       // to be sure
+                        .AllowAnyMethod();      // for any method: POST, DELETE etc.
+                    });
+            });
+
+
+
+            services.AddScoped<IArticleRepository, ArticleRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddSingleton<IArticleService, ArticleService>();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson();
             services.AddDbContextPool<MyDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("MyDb")));
@@ -61,6 +80,8 @@ namespace Shop
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors();
+
             MyIdentityDataInitializer.SeedData(userManager, roleManager);
 
             app.UseEndpoints(endpoints =>
@@ -68,6 +89,9 @@ namespace Shop
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "api",
+                    pattern: "api/{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");

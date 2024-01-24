@@ -6,22 +6,29 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Shop.Services;
 
 namespace Shop.Controllers
 {
     public class ShopController : Controller
     {
         private readonly MyDbContext _context;
+        private readonly IArticleService _articleService;
 
-        public ShopController(MyDbContext context)
+        public ShopController(MyDbContext context, IArticleService articleService)
         {
             _context = context;
+            _articleService = articleService;
         }
 
         public async Task<IActionResult> Index()
         {
             var categories = await _context.Categories.ToListAsync();
-            var articles = await _context.Articles.ToListAsync();
+            var articles = await _context.Articles
+                .OrderBy(a => a.Id)
+                .Take(_articleService.GetArticlesCount())
+                .ToListAsync();
 
             var viewModel = new ShopViewModel
             {
